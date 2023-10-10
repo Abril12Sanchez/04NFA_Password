@@ -7,7 +7,7 @@ class Producto {
         this.cantidad = datos.cantidad; 
         this.foto=datos.foto;
         this.bandera = 0; 
-        
+         
     } 
     set id(id){ 
         if(id!=null){ 

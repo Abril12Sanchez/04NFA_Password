@@ -28,7 +28,7 @@ class Usuario {
     }
     set foto(foto) {
         foto.length > 0 ? this._foto = foto : this.bandera = 1; // Si la edad es mayor a 0, se asigna a la propiedad _edad, si no, se asigna 1 a la propiedad bandera
-    }
+    } 
     get id() {
     return this._id; // Se retorna el valor de la propiedad _id
     }

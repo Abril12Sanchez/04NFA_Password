@@ -31,7 +31,7 @@ ruta.post("/api/nuevoProducto", subirArchivo(), async (req, res) => {
     res.status(400).json("Error al ingresar nuevo usuario");
   }
 });
-
+ 
 //BUSCA PRODUCTO POR ID
 ruta.get("/producto/api/buscarProductoPorId/:id", async (req, res) => {
   try {

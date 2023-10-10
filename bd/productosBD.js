@@ -12,7 +12,7 @@ async function mostrarProducto(){
                 products.push(product.obtenerData);
             }
         });
-    }
+    } 
     catch(err){
         console.log("Error al recuperar PRODUCTOS en la base de datos"+err);
     }

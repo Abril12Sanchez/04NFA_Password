@@ -11,4 +11,4 @@ var conexionPro=micuenta.collection("productos");
 module.exports = {
     conexionUsu,
     conexionPro
-};
+}; 

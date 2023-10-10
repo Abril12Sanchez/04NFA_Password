@@ -11,7 +11,7 @@ if(admin.apps.length){
 }else{
     admin.app();
 }
-
+ 
 var micuenta=admin.firestore();
 var conexionPro=micuenta.collection("productos");
 

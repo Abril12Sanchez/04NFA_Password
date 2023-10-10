@@ -10,4 +10,4 @@ function subirArchivo(){
     var upload=multer({storage}).single('foto');
     return upload;
 }
-module.exports=subirArchivo;
+module.exports=subirArchivo; 

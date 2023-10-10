@@ -44,7 +44,7 @@ ruta.post("/editar",subirArchivo(), async(req,res)=>{
   }else{
     req.body.foto=usuario.foto;
   }
-  
+   
   var error=await modificarUsuario(req.body);
   res.redirect("/");
 });

@@ -7,7 +7,7 @@ ruta.get("/producto", async (req,res)=>{ //req y res las declaramos aqui, see pu
     var productos= await mostrarProducto();
      res.render("productos/mostrarP",{productos});
    })
-
+ 
    ruta.get("/nuevoproducto", async (req,res)=>{
      res.render("productos/nuevoP");
    })

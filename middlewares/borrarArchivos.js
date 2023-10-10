@@ -6,4 +6,4 @@ fs.unlink('./ruta/borrarArchivos')
     console.log('File removed')
   }).catch(err => {
     console.error('Something wrong happened removing the file', err)
-  })
+  }) 

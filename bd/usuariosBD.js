@@ -14,7 +14,7 @@ async function mostrarUsuarios(){
                 console.log(user.obtenerData);
             }
         });
-        
+         
     }
     catch(err){
         console.log("Error al recuperar usuarios en la base de datos"+err);

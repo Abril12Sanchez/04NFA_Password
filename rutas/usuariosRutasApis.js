@@ -49,7 +49,7 @@ try{
   res.status(500).json("Error del servidor");
 }
 //  console.log(user);
- 
+  
 //  res.render("usuarios/modificar",{user});
 });
 
