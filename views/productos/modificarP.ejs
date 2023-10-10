@@ -1,0 +1,29 @@
+<%- include("../templates/encabezado")%> <%- include("../templates/menu")%>
+<div class="container mt-5">
+  <form action="/producto/editarP" method="post" enctype="multipart/form-data">
+    <div class="card">
+      <div class="card-header">
+        <h3>Modificar Producto: <%= product.id%></h3>
+        <!--recupera datoooos 1 -->
+      </div>
+      <div class="card-body">
+        <input class="form-control mb-3" type="hidden" name="id" id="id" value="<%= product.id %>" />
+        <input value="<%= product.nombre %>" class="form-control mb-3" type="text" name="nombre" id="nombre"
+          placeholder="Nombre"  autofocus autocomplete="name" />
+        <input value="<%= product.precio %>" class="form-control mb-3" type="number" name="precio"
+          id="precio" placeholder="Precio" />
+        <input value="<%= product.cantidad %>" class="form-control mb-3" type="number" name="cantidad"
+          id="cantidad" placeholder="Cantidad"  />
+        <input value="<%= product.descripcion %>" class="form-control mb-3" type="text" name="descripcion"
+          id="descripcion"  placeholder="Descripcion"  />
+
+          <img src="/images/<%= product.foto%>" height="80px" width="70px">
+            <input class="form-control mb-3" type="file"  value="<%= product.foto%>" name="foto" id="foto" >
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="form control btn btn-success"  type="submit">Modificar Usuario </button>
+      </div>
+    </div>
+  </form>
+</div>
+<%- include("../templates/pie")%>

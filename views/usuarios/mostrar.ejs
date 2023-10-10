@@ -1,0 +1,87 @@
+<%- include("../templates/encabezado")%>
+ <%- include("../templates/menu")%>
+ <div class="container mt-5"> <!--deja margintop de 5 siendo el mayor -->
+  <div class="card">
+    <div class="card-header" style="background-color:azure">
+      <h3>Usuarios</h3>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped table-hover">
+        <thead>
+          <th>id</th>
+          <th>Edad</th>
+          <th>Nombre</th>
+          <th>Usuario</th>
+          <th>Foto</th>
+          <th>Password</th>
+          <th>Editar</th>
+          <th>Borrar</th>
+        </thead>
+        <tbody>
+          <% usuarios.forEach((usuario, index) => { %>
+          <tr>
+            <td><%= usuario.id %></td>
+            <td><%= usuario.edad %></td>
+            <td><%= usuario.nombre %></td>
+            <td><%= usuario.usuario %></td>
+
+            <td >
+              <div>
+                <img src="/images/<%= usuario.foto %>" alt="Foto de <%= usuario.nombre %>" height="80px" width="80px">
+              </div>
+            </td>
+            <!-- <td>
+              <a href="/editar/<%= usuario.id %>">Editar</a>
+              <a href="/borrar/<%= usuario.id %>">Borrar</a>
+            </td> -->
+            <td>
+              <input
+                type="password"
+                id="password<%= index %>"
+                name="password"
+                readonly
+                disabled
+                style="border: none; background-color: transparent;"
+                value="<%= usuario.password %>"
+              />
+              <span class="input-group-btn">
+                <button
+                  id="show_password<%= index %>"
+                  class="btn btn-secondary"
+                  type="button"
+                  style="padding: 6px"
+                >
+                  <span><i class="bi bi-eye-fill"></i></span>
+                </button>
+              </span>
+            </td>
+            
+            <td>
+              <a href="/editar/<%= usuario.id %>" class="btn btn-warning"
+                ><i class="bi bi-pen-fill"></i
+              ></a>
+            </td>
+            <td>
+              <a
+                href="/borrar/<%= usuario.id %>"
+                class="btn btn-danger"
+                ><i class="bi bi-trash3-fill"></i
+              ></a>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<% usuarios.forEach((usuario, index) => { %>
+  <script>
+    $('#show_password<%= index %>').hover(function() {
+        $('#password<%= index %>').attr('type', 'text');
+    }, function () {
+        $('#password<%= index %>').attr('type', 'password');
+    });
+  </script>
+<% }); %>
+<%- include("../templates/pie")%>

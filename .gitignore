@@ -1,0 +1,8 @@
+# Ignorar el directorio node_modules y sus contenidos
+node_modules/
+
+# Ignorar el archivo package-lock.json
+package-lock.json
+
+# Opcional: Ignorar el archivo package.json si no quieres compartirlo
+# package.json
