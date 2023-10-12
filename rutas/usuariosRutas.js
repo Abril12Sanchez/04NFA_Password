@@ -38,6 +38,10 @@ ruta.get("/editar/:id",async(req,res)=>{
 ruta.post("/editar",subirArchivo(), async(req,res)=>{
   // console.log(req.body);//recive todo lo del formulario
   // res.end();
+  
+  // if(req.file!=undefined){
+  //   req.body.foto=req.file.originalname;
+  // }
   var usuario=await buscarPorID(req.body.id);
   if(req.file){
     req.body.foto=req.file.originalname;

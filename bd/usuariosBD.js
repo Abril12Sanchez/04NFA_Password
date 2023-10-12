@@ -1,6 +1,6 @@
 var conexion=require("./conexion").conexionUsu;
 var Usuario=require("../modelos/Usuario");
-
+var {encriptarPassword}=require("../middlewares/funcionesPassword");
 
 async function mostrarUsuarios(){
     var users=[];
@@ -11,7 +11,7 @@ async function mostrarUsuarios(){
             var user=new Usuario(usuario.id, usuario.data());
             if(user.bandera==0){
                 users.push(user.obtenerData);
-                console.log(user.obtenerData);
+               // console.log(user.obtenerData);
             }
         });
          
@@ -39,10 +39,19 @@ async function buscarPorID(id){
 }
 
 async function nuevoUsuario(datos){
+    var {hash, salt}=encriptarPassword(datos.password);
+    datos.passwsord=hash;
+    datos.salt=salt;
     var user=new Usuario(null, datos);
     var error=1;
         if(user.bandera==0){
             try{
+                // //MANDAMOS ENCRIPTAR
+                // var{salt, hash}=encriptarPassword(user.obtenerData.password);//regresa pass encryp
+                // console.log(hash);
+                user.password=hash;
+                user.obtenerData.salt=salt;
+                console.log(salt);
                 await conexion.doc().set(user.obtenerData); 
                 console.log("Usuario insertado a la BD");
                 error=0;
@@ -56,13 +65,15 @@ async function nuevoUsuario(datos){
 
 
 async function modificarUsuario(datos){
+    console.log(datos.fotoVieja);
+    console.log(datos.passwsordViejo);
     var error=1;
     var respuestaBuscar=await buscarPorID(datos.id);
     if(respuestaBuscar!=undefined){
             var user=new Usuario(datos.id, datos);
         if (user.bandera==0){
             try{
-                await conexion.doc(user.id).set(user.obtenerData); 
+              //  await conexion.doc(user.id).set(user.obtenerData); 
                 console.log("Registro acualizado");
                 error=0;
             }catch(err){
