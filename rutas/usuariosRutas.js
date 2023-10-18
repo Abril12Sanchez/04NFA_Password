@@ -1,14 +1,20 @@
 var ruta = require("express").Router(); //variable de ruta
 var subirArchivo=require("../middlewares/subirArchivos");
-var {mostrarUsuarios, nuevoUsuario, modificarUsuario, buscarPorID, borrarUsuario}=require("../bd/usuariosBD");
+var {mostrarUsuarios, nuevoUsuario, modificarUsuario, buscarPorID, borrarUsuario,login}=require("../bd/usuariosBD");
 
 ruta.get("/", async (req,res)=>{ //req y res las declaramos aqui, see pueden llamar distinto
  var usuarios= await mostrarUsuarios();
+  res.render("login",{usuarios});
+})
+
+ruta.get("/mostrar", async (req,res)=>{ //req y res las declaramos aqui, see pueden llamar distinto
+ var usuarios= await mostrarUsuarios();
   res.render("usuarios/mostrar",{usuarios});
 })
-ruta.get("/nuevousuario", async (req,res)=>{
+ ruta.get("/nuevousuario", async (req,res)=>{
   res.render("usuarios/nuevo");
 })
+
 ruta.post("/nuevousuario", subirArchivo(), async (req,res)=>{
   //console.log(req.file);
   req.body.foto=req.file.originalname;
@@ -58,4 +64,23 @@ ruta.get("/borrar/:id", async(req,res)=>{
   await borrarUsuario(req.params.id);
   res.redirect("/");
 });
+
+ruta.post("/login",async(req,res)=>{
+  var user=await login(req.body);
+  console.log(user);
+  if(user==undefined){
+    res.redirect("/error")
+  }else{
+    res.redirect("/mostrar"); //cuando tengo esa ruta
+  }
+})
+
+ruta.get("/registro", async(req,res)=>{
+  res.render("/usuarios/nuevo"); //para ir a algun archivo
+})
+
+
+ruta.get("/error",async(req,res)=>{
+  res.render("pantallaError");
+})
 module.exports = ruta;

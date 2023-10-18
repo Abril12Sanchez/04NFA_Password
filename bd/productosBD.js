@@ -72,6 +72,7 @@ async function nuevoProducto(datos) {
 async function modificarProducto(datos){
     var error=1;
     var respuestaBuscarP=await buscarPorID(datos.id);
+
     if(respuestaBuscarP!=undefined){
      var producto=new Producto(datos.id, datos);
        

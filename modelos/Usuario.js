@@ -40,7 +40,7 @@ class Usuario {
     }
     get nombre() {
     return this._nombre;  // Se retorna el valor de la propiedad _nombre
-    }º  
+    }  
     get usuario() {
     return this._usuario;  // Se retorna el valor de la propiedad _usuario
     }
