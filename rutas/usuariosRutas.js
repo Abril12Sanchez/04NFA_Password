@@ -1,19 +1,24 @@
 var ruta = require("express").Router(); //variable de ruta
 var subirArchivo=require("../middlewares/subirArchivos");
+var autorizado=require("../middlewares/funcionesPassword").autorizado;
+var admin=require("../middlewares/funcionesPassword").admin;
 var {mostrarUsuarios, nuevoUsuario, modificarUsuario, buscarPorID, borrarUsuario,login}=require("../bd/usuariosBD");
 
 ruta.get("/", async (req,res)=>{ //req y res las declaramos aqui, see pueden llamar distinto
  var usuarios= await mostrarUsuarios();
   res.render("login",{usuarios});
-})
+});
 
-ruta.get("/mostrar", async (req,res)=>{ //req y res las declaramos aqui, see pueden llamar distinto
- var usuarios= await mostrarUsuarios();
+ruta.get("/mostrar", autorizado, async (req,res)=>{ //req y res las declaramos aqui, see pueden llamar distinto
+  var usuarios= await mostrarUsuarios();
   res.render("usuarios/mostrar",{usuarios});
-})
+  
+});
+
  ruta.get("/nuevousuario", async (req,res)=>{
   res.render("usuarios/nuevo");
-})
+});
+
 
 ruta.post("/nuevousuario", subirArchivo(), async (req,res)=>{
   //console.log(req.file);
@@ -67,16 +72,32 @@ ruta.get("/borrar/:id", async(req,res)=>{
 
 ruta.post("/login",async(req,res)=>{
   var user=await login(req.body);
-  console.log(user);
+  console.log(req.session.usuario);
+  //console.log(user);
   if(user==undefined){
     res.redirect("/error")
   }else{
-    res.redirect("/mostrar"); //cuando tengo esa ruta
+    if(user.admin){
+      console.log("Admin");
+      req.session.admin=req.body.usuario;
+      res.redirect("/producto/nuevoproducto"); //cuando tengo esa ruta
+    }else{
+      console.log("Usuario");
+      req.session.usuario=req.body.usuario;
+      res.redirect("/mostrar"); //cuando tengo esa ruta
+    }
+    
   }
-})
+});
+
+ruta.get("/logout",(req,res)=>{
+  req.session=null;
+  res.redirect("/");
+});
+
 
 ruta.get("/registro", async(req,res)=>{
-  res.render("/usuarios/nuevo"); //para ir a algun archivo
+  res.render("usuarios/nuevo"); //para ir a algun archivo
 })
 
 

@@ -8,6 +8,7 @@ class Usuario {
         this.edad = data.edad;  // Propiedades de la clase
         this.foto=data.foto;
         this.salt=data.salt;
+        this.admin=data.admin;
     }
 
 
@@ -35,6 +36,10 @@ class Usuario {
     set salt(salt){
         salt.length > 0 ? this._salt =salt :this.bandera =1;
     }
+    set admin(admin){
+        this._admin=admin;
+    }
+    
     get id() {
     return this._id; // Se retorna el valor de la propiedad _id
     }
@@ -57,6 +62,9 @@ class Usuario {
     get salt(){
         return this._salt;
     }
+    get admin(){
+        return this._admin;
+    }
 
     get obtenerData(){
         if(this._id !=null)
@@ -67,7 +75,8 @@ class Usuario {
             password: this.password,  // Se retorna el valor de la propiedad password de el get password
             edad: this.edad,  // Se retorna el valor de la propiedad edad de el get edad
             foto: this.foto,
-            salt: this.salt
+            salt: this.salt,
+            admin: this.admin
         }
         else{
             return {
@@ -76,7 +85,8 @@ class Usuario {
                 password: this.password,  // Se retorna el valor de la propiedad password de el get password
                 edad: this.edad,  // Se retorna el valor de la propiedad edad de el get edad
                 foto:this.foto,
-                salt: this.salt
+                salt: this.salt,
+                admin:this.admin
             }
         }
         

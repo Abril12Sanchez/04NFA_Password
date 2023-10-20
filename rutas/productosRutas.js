@@ -1,6 +1,7 @@
 var ruta = require("express").Router(); //variable de ruta
 var {mostrarProducto, nuevoProducto, modificarProducto, buscarPorID, borrarProducto}=require("../bd/productosBD");
 const subirArchivo = require("../middlewares/subirArchivos");
+const admin = require("../middlewares/funcionesPassword").admin;
 
 
 ruta.get("/producto", async (req,res)=>{ //req y res las declaramos aqui, see pueden llamar distinto
@@ -8,7 +9,7 @@ ruta.get("/producto", async (req,res)=>{ //req y res las declaramos aqui, see pu
      res.render("productos/mostrarP",{productos});
    })
  
-   ruta.get("/nuevoproducto", async (req,res)=>{
+   ruta.get("/nuevoproducto", admin, async (req,res)=>{
      res.render("productos/nuevoP");
    })
 

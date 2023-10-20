@@ -42,6 +42,7 @@ async function nuevoUsuario(datos){
     var {hash, salt}=encriptarPassword(datos.password);
     datos.passwsord=hash;
     datos.salt=salt;
+    datos.admin=false;
     var user=new Usuario(null, datos);
     var error=1;
         if(user.bandera==0){
